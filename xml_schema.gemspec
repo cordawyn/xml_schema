@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["Slava Kravchenko"]
   s.email       = ["slava.kravchenko@gmail.com"]
-  s.homepage    = ""
+  s.homepage    = "https://github.com/cordawyn/xml_schema"
   s.summary     = %q{Helper methods and constants to handle XmlSchema}
   s.description = %q{Helper methods and constants to handle XmlSchema}
 
