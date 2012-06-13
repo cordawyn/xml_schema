@@ -1,16 +1,12 @@
-$:.unshift(File.dirname(__FILE__)) unless
-  $:.include?(File.dirname(__FILE__)) || $:.include?(File.expand_path(File.dirname(__FILE__)))
-
-require 'xml_schema/ns'
 require 'time'
+require 'xml_schema/ns'
 
-# Slightly modified xml_schema from Redlander project
 module XmlSchema
 
   TYPES = %w(int boolean float dateTime time date string decimal double duration gYearMonth gYear gMonthDay gDay gMonth hexBinary base64Binary anyURI QName NOTATION)
 
 
-  # Obtain XML Schema datatype (as RDF node) for a Ruby object.
+  # Obtain XML Schema datatype URI for a Ruby object.
   def self.datatype_of(object)
     #--
     # TODO: decimal, double, duration (Range?), gYearMonth, gYear, gMonthDay, gDay, gMonth, hexBinary, base64Binary, anyURI, QName, NOTATION
@@ -32,7 +28,7 @@ module XmlSchema
     when "String"
       NS::XMLSchema['string'].to_s
     else
-      raise RedlandError.new("#{object.class} cannot be coerced into any XMLSchema datatype")
+      raise "#{object.class} cannot be coerced into any XMLSchema datatype"
     end
   end
 

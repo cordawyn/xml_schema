@@ -3,3 +3,5 @@ pkg/*
 vendor/ruby
 vendor/rbx
 .rbx
+.*~
+*~
