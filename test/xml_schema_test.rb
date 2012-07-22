@@ -53,31 +53,31 @@ class XmlSchemaTest < Test::Unit::TestCase
   end
 
   def test_should_return_datatype_for_integer
-    assert_equal URI("http://www.w3.org/2001/XMLSchema#int"), XmlSchema.datatype_of(42)
+    assert_equal "http://www.w3.org/2001/XMLSchema#int", XmlSchema.datatype_of(42)
   end
 
   def test_should_return_datatype_for_boolean
-    assert_equal URI("http://www.w3.org/2001/XMLSchema#boolean"), XmlSchema.datatype_of(true)
+    assert_equal "http://www.w3.org/2001/XMLSchema#boolean", XmlSchema.datatype_of(true)
   end
 
   def test_should_return_datatype_for_float
-    assert_equal URI("http://www.w3.org/2001/XMLSchema#float"), XmlSchema.datatype_of(11.11)
+    assert_equal "http://www.w3.org/2001/XMLSchema#float", XmlSchema.datatype_of(11.11)
   end
 
   def test_should_return_datatype_for_datetime
-    assert_equal URI("http://www.w3.org/2001/XMLSchema#dateTime"), XmlSchema.datatype_of(DateTime.new)
+    assert_equal "http://www.w3.org/2001/XMLSchema#dateTime", XmlSchema.datatype_of(DateTime.new)
   end
 
   def test_should_return_datatype_for_time
-    assert_equal URI("http://www.w3.org/2001/XMLSchema#time"), XmlSchema.datatype_of(Time.now)
+    assert_equal "http://www.w3.org/2001/XMLSchema#time", XmlSchema.datatype_of(Time.now)
   end
 
   def test_should_return_datatype_for_date
-    assert_equal URI("http://www.w3.org/2001/XMLSchema#date"), XmlSchema.datatype_of(Date.today)
+    assert_equal "http://www.w3.org/2001/XMLSchema#date", XmlSchema.datatype_of(Date.today)
   end
 
   def test_should_return_datatype_for_string
-    assert_equal URI("http://www.w3.org/2001/XMLSchema#string"), XmlSchema.datatype_of("test")
+    assert_equal "http://www.w3.org/2001/XMLSchema#string", XmlSchema.datatype_of("test")
   end
 
   def test_should_raise_exception_on_unknown_class
