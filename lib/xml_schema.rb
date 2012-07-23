@@ -2,7 +2,6 @@ require 'time'
 require 'xml_schema/ns'
 
 module XmlSchema
-
   TYPES = %w(int boolean float dateTime time date string decimal double duration gYearMonth gYear gMonthDay gDay gMonth hexBinary base64Binary anyURI QName NOTATION)
 
 
@@ -14,19 +13,19 @@ module XmlSchema
     #++
     case object.class.name
     when "Fixnum", "Integer"
-      NS::XMLSchema['int'].to_s
+      NS::XMLSchema['int']
     when "TrueClass", "FalseClass"
-      NS::XMLSchema['boolean'].to_s
+      NS::XMLSchema['boolean']
     when "Float"
-      NS::XMLSchema['float'].to_s
+      NS::XMLSchema['float']
     when "DateTime"
-      NS::XMLSchema['dateTime'].to_s
+      NS::XMLSchema['dateTime']
     when "Time"
-      NS::XMLSchema['time'].to_s
+      NS::XMLSchema['time']
     when "Date"
-      NS::XMLSchema['date'].to_s
+      NS::XMLSchema['date']
     when "String"
-      NS::XMLSchema['string'].to_s
+      NS::XMLSchema['string']
     else
       raise "#{object.class} cannot be coerced into any XMLSchema datatype"
     end
@@ -72,5 +71,4 @@ module XmlSchema
       literal_value
     end
   end
-
 end
