@@ -1,0 +1,5 @@
+xml_schema (0.1.0)
+
+  * XmlSchema.datatype_of returns URI, not String
+  * XmlSchema.to_s returns the URI string without trailing "#"
+  * XmlSchema.uri (and "[]" accessor, e.g. NS::OWL["hello"]) return an instance of URI

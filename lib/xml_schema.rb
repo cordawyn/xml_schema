@@ -38,16 +38,17 @@ module XmlSchema
     # NOTE: removing language tag (e.g. "@en")
     full_literal = datatype_uri ? literal.sub(/@\w+$/, '') + "^^<#{datatype_uri}>" : literal.sub(/@\w+$/, '')
     literal_value, literal_type = full_literal.split('^^')
-    datatype = if literal_type
-      ns, l_type = literal_type.delete("<>").split('#')
-      if ns == NS::XMLSchema.uri && TYPES.include?(l_type)
-        l_type
+    datatype =
+      if literal_type
+        ns, l_type = literal_type.delete("<>").split('#')
+        if URI(ns) == NS::XMLSchema.uri && TYPES.include?(l_type)
+          l_type
+        else
+          raise "Incompatible datatype URI! (#{ns})"
+        end
       else
-        raise "Incompatible datatype URI! (#{ns})"
+        'string'
       end
-    else
-      'string'
-    end
 
     # clean-up the literal_value
     literal_value.sub!(/^["']/, '')

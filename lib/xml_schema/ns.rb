@@ -13,15 +13,15 @@ module NS
     ns_module = self.const_set(name, Module.new)
     ns_module.module_eval <<-HERE
       def self.uri
-        \"#{url}\"
+        URI(\"#{url}\")
       end
 
       def self.to_s
-        \"\#{uri}#\"
+        \"#{url}\"
       end
 
       def self.[](value)
-        URI.parse(\"\#{self}\#{value}\")
+        URI(\"\#{self}#\#{value}\")
       end
 HERE
   end
