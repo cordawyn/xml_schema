@@ -41,7 +41,8 @@ module XmlSchema
     datatype =
       if literal_type
         ns, l_type = literal_type.delete("<>").split('#')
-        if URI(ns) == NS::XMLSchema.uri && TYPES.include?(l_type)
+        # TODO: somehow use a better comparison of URIs which ignores "/" at the end?
+        if URI(ns.sub(/\/*$/, "/")) == NS::XMLSchema.uri && TYPES.include?(l_type)
           l_type
         else
           raise "Incompatible datatype URI! (#{ns})"
