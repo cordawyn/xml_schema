@@ -2,7 +2,7 @@ require 'time'
 require 'xml_schema/ns'
 
 module XmlSchema
-  TYPES = %w(int boolean float dateTime time date string decimal double duration gYearMonth gYear gMonthDay gDay gMonth hexBinary base64Binary anyURI QName NOTATION)
+  TYPES = %w(integer boolean float dateTime time date string decimal double duration gYearMonth gYear gMonthDay gDay gMonth hexBinary base64Binary anyURI QName NOTATION)
 
 
   # Obtain XML Schema datatype URI for a Ruby object.
@@ -13,7 +13,7 @@ module XmlSchema
     #++
     case object.class.name
     when "Fixnum", "Integer"
-      NS::XMLSchema['int']
+      NS::XMLSchema['integer']
     when "TrueClass", "FalseClass"
       NS::XMLSchema['boolean']
     when "Float"
@@ -56,7 +56,7 @@ module XmlSchema
     literal_value.sub!(/["']$/, '')
 
     case datatype
-    when 'int'
+    when 'integer'
       literal_value.to_i
     when 'boolean'
       %w(1 true).include?(literal_value)

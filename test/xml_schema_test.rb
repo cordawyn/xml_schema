@@ -2,7 +2,7 @@ require "test_helper"
 
 class XmlSchemaTest < Test::Unit::TestCase
   def test_should_instantiate_an_integer
-    value = XmlSchema.instantiate "55^^<http://www.w3.org/2001/XMLSchema#int>"
+    value = XmlSchema.instantiate "55^^<http://www.w3.org/2001/XMLSchema#integer>"
     assert_equal 55, value
   end
 
@@ -53,7 +53,7 @@ class XmlSchemaTest < Test::Unit::TestCase
   end
 
   def test_should_return_datatype_for_integer
-    assert_equal URI("http://www.w3.org/2001/XMLSchema#int"), XmlSchema.datatype_of(42)
+    assert_equal URI("http://www.w3.org/2001/XMLSchema#integer"), XmlSchema.datatype_of(42)
   end
 
   def test_should_return_datatype_for_boolean
