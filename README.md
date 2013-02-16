@@ -13,8 +13,8 @@
 
 XmlSchema also provides means to access and work with frequently used namespaces:
 
-  $ NS::OWL.uri  # => #<URI::HTTP:0x00000000dcff78 URL:http://www.w3.org/2002/07/owl>
-  $ NS::RDFS["hello"]  # => #<URI::HTTP:0x00000000dcff78 URL:http://www.w3.org/2000/01/rdf-schema#hello>
+    $ NS::OWL.uri  # => #<URI::HTTP:0x00000000dcff78 URL:http://www.w3.org/2002/07/owl>
+    $ NS::RDFS["hello"]  # => #<URI::HTTP:0x00000000dcff78 URL:http://www.w3.org/2000/01/rdf-schema#hello>
 
 That's pretty much all there is to it.
 
