@@ -1,15 +1,15 @@
 require 'time'
 require 'xml_schema/ns'
+require 'ext/string'
+require 'ext/localized_string'
 
 module XmlSchema
   TYPES = %w(integer boolean float dateTime time date string decimal double duration gYearMonth gYear gMonthDay gDay gMonth hexBinary base64Binary anyURI QName NOTATION)
-
 
   # Obtain XML Schema datatype URI for a Ruby object.
   def self.datatype_of(object)
     #--
     # TODO: decimal, double, duration (Range?), gYearMonth, gYear, gMonthDay, gDay, gMonth, hexBinary, base64Binary, anyURI, QName, NOTATION
-    # TODO: language tag?
     #++
     case object.class.name
     when "Fixnum", "Integer"
@@ -24,7 +24,7 @@ module XmlSchema
       NS::XMLSchema['time']
     when "Date"
       NS::XMLSchema['date']
-    when "String"
+    when "String", "LocalizedString"
       NS::XMLSchema['string']
     else
       raise "#{object.class} cannot be coerced into any XMLSchema datatype"
@@ -36,7 +36,15 @@ module XmlSchema
   # +literal+ is interpreted as RDF typed literal (with datatype postfix).
   def self.instantiate(literal, datatype_uri = nil)
     # NOTE: removing language tag (e.g. "@en")
-    full_literal = datatype_uri ? literal.sub(/@\w+$/, '') + "^^<#{datatype_uri}>" : literal.sub(/@\w+$/, '')
+    lang_regexp = /@(\w+{2})$/
+    lang = nil
+    if literal =~ lang_regexp
+      lang = $1
+      # make a local copy of literal, with removed lang tag
+      literal = literal.sub(lang_regexp, "")
+    end
+    
+    full_literal = datatype_uri ? literal + "^^<#{datatype_uri}>" : literal
     literal_value, literal_type = full_literal.split('^^')
     datatype =
       if literal_type
@@ -51,7 +59,7 @@ module XmlSchema
         'string'
       end
 
-    # clean-up the literal_value
+    # clean-up literal_value
     literal_value.sub!(/^["']/, '')
     literal_value.sub!(/["']$/, '')
 
@@ -69,8 +77,12 @@ module XmlSchema
     when 'float'
       literal_value.to_f
     else
-      # FIXME: fallback for unknown datatypes and 'string'
-      literal_value
+      if lang
+        LocalizedString.new(literal_value, lang.to_sym)
+      else
+        # FIXME: fallback for unknown datatypes and 'string'
+        literal_value
+      end
     end
   end
 end

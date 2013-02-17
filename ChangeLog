@@ -1,3 +1,7 @@
+xml_schema (0.2.0)
+
+  * introducing LocalizedString to handle string literals like "hello@en"
+
 xml_schema (0.1.2)
 
   * fix for comparing URIs ending in "/"

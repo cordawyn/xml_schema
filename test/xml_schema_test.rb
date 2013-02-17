@@ -41,6 +41,12 @@ class XmlSchemaTest < Test::Unit::TestCase
     assert_equal "hello", value
   end
 
+  def test_should_instantiate_a_localized_string
+    value = XmlSchema.instantiate "bonjour@fr"
+    assert_equal "bonjour", value
+    assert_equal :fr, value.lang
+  end
+
   def test_should_instantiate_a_string_by_default
     value = XmlSchema.instantiate "ahoy!"
     assert_equal "ahoy!", value
@@ -78,6 +84,10 @@ class XmlSchemaTest < Test::Unit::TestCase
 
   def test_should_return_datatype_for_string
     assert_equal URI("http://www.w3.org/2001/XMLSchema#string"), XmlSchema.datatype_of("test")
+  end
+
+  def test_should_return_datatype_for_localized_string
+    assert_equal URI("http://www.w3.org/2001/XMLSchema#string"), XmlSchema.datatype_of("test".with_lang(:de))
   end
 
   def test_should_raise_exception_on_unknown_class
