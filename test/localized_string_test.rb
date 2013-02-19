@@ -1,8 +1,8 @@
 require "test_helper"
 
 class LocalizedStringTest < Test::Unit::TestCase
-  def test_initialized_with_default_locale
-    assert_equal :en, LocalizedString.new("hello").lang
+  def test_initialized_with_no_lang
+    assert_equal nil, LocalizedString.new("hello").lang
   end
 
   def test_initialized_with_given_locale
@@ -10,7 +10,7 @@ class LocalizedStringTest < Test::Unit::TestCase
   end
 
   def test_compared_to_another_localized_string
-    assert_equal LocalizedString.new("hello"), LocalizedString.new("hello", :en)
+    assert_equal LocalizedString.new("hello"), LocalizedString.new("hello")
   end
 
   def test_does_not_compare_to_localized_string_in_another_language

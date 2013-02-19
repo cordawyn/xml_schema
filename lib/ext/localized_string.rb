@@ -7,7 +7,7 @@
 class LocalizedString < String
   attr_reader :lang
 
-  def initialize(str, lng = default_locale)
+  def initialize(str, lng = nil)
     @lang = lng
     super str
   end
@@ -27,14 +27,4 @@ class LocalizedString < String
     end
   end
   alias :== :eql?
-
-  private
-
-  def default_locale
-    if defined?(I18n)
-      I18n.locale || I18n.default_locale
-    else
-      :en
-    end
-  end
 end
